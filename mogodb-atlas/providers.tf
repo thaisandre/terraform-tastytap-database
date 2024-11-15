@@ -4,10 +4,11 @@ terraform {
       source = "mongodb/mongodbatlas"
     }
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
+      version = "~> 5.00"
     }
   }
-  required_version = ">= 0.13"
+  required_version = ">= 1.0.0"
 }
 
 provider "aws" {
