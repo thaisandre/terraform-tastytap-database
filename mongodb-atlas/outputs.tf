@@ -7,6 +7,6 @@ locals {
 }
 
 output "mongo_connection_string" {
-  value       = "mongodb+srv://admin:admin@${local.mongodb_server_without_uri}"
+  value       = "mongodb+srv://${var.mongo_db_username}:${var.mongo_db_password}@${local.mongodb_server_without_uri}"
   sensitive   = true
 }
