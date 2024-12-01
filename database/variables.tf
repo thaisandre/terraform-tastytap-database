@@ -57,12 +57,12 @@ variable "project_id" {
   type        = string
 }
 
-variable mongodbatlas_public_key {
+variable "mongodbatlas_public_key" {
   description = "MongoDB Atlas public key"
   type        = string
 }
 
-variable mongodbatlas_private_key {
+variable "mongodbatlas_private_key" {
   description = "MongoDB Atlas private key"
   type        = string
 }

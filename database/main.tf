@@ -112,8 +112,19 @@ provider "mongodbatlas" {
   private_key = var.mongodbatlas_private_key
 }
 
+resource "mongodbatlas_cluster" "tastytap_payment" {
+  project_id                  = var.project_id
+  name                        = "mongodb-tastytap-cluster"
+  cluster_type                = "REPLICASET"
+
+  provider_name               = "TENANT"
+  backing_provider_name       = "AWS"
+  provider_region_name        = "US_EAST_1"
+  provider_instance_size_name = "M0"
+}
+
 resource "mongodbatlas_database_user" "db-user" {
-  auth_database_name = var.mongo_db_username
+  auth_database_name = "admin"
   username           = var.mongo_db_username
   password           = var.mongo_db_password
   project_id         = var.project_id
@@ -121,19 +132,9 @@ resource "mongodbatlas_database_user" "db-user" {
   roles {
     role_name     = "readWrite"
     database_name = "tastytap"
-    collection_name = "payments"
   }
-}
 
-resource "mongodbatlas_cluster" "tastytap_payment" {
-  project_id                  = var.project_id
-  name                        = "mongodb-tastytap-cluster"
-  cluster_type                = "REPLICASET"
-  
-  provider_name               = "TENANT"
-  backing_provider_name       = "AWS"
-  provider_region_name        = "US_EAST_1"
-  provider_instance_size_name = "M0"
+  depends_on = [mongodbatlas_cluster.tastytap_payment]
 }
 
 resource "mongodbatlas_project_ip_access_list" "ip_access_list" {
