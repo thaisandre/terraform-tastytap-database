@@ -1,4 +1,4 @@
-name: "Terraform Plan" #test
+name: "Terraform Plan"
 
 on:
   pull_request:
@@ -23,14 +23,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-
-    - name: Set up Terraform environment
-      env:
-        TF_VAR_mongodbatlas_public_key: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
-        TF_VAR_mongodbatlas_private_key: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
-        TF_VAR_product_id: ${{ secrets.MONGODB_ATLAS_PRODUCT_ID }}
-      run: |
-        echo "Terraform environment set up"
 
     - name: Upload Configuration
       uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
