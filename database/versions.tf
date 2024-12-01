@@ -6,6 +6,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 5.00"
     }
+
+    mongodbatlas = {
+      source = "mongodb/mongodbatlas"
+    }
   }
 
   backend "remote" {
